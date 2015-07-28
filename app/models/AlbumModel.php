@@ -32,7 +32,7 @@ class AlbumModel extends Nette\Object
     /**
      * @param ArrayAccess $albumData
      */
-    public function addAlbum(ArrayAccess $albumData)
+    public function add(ArrayAccess $albumData)
     {
         $album = new Album();
         $album->setArtist($albumData['artist']);
@@ -43,14 +43,33 @@ class AlbumModel extends Nette\Object
         $this->em->flush();
     }
 
-    public function editAlbum($albumId, array $albumData)
+    /**
+     * @param Album $album
+     * @param ArrayAccess $albumData
+     */
+    public function edit(Album $album, ArrayAccess $albumData)
     {
+        $album->setArtist($albumData['artist']);
+        $album->setAlbumName($albumData['albumName']);
+        $album->setYear($albumData['year']);
 
+        $this->em->persist($album);
+        $this->em->flush();
     }
 
-    public function deleteAlbum($albumId)
+    /**
+     * @param $albumId
+     */
+    public function delete($albumId)
     {
+        /**
+         * @var Album $album
+         */
+        $album = $this->albumDao->find($albumId);
+        $album->delete();
 
+        $this->em->persist($album);
+        $this->em->flush();
     }
 
     /**
@@ -58,6 +77,20 @@ class AlbumModel extends Nette\Object
      */
     public function getAll()
     {
-        return $this->albumDao->findAll();
+        $qb = $this->em->createQueryBuilder();
+        $query = $qb->select('a')
+            ->from(Album::class, 'a')
+            ->where('a.deletedAt IS NULL');
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @param $albumId
+     * @return Album
+     */
+    public function get($albumId)
+    {
+        return $this->albumDao->find($albumId);
     }
 }

@@ -156,4 +156,12 @@ class Album extends BaseEntity
     {
         $this->users = $users;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasUsers()
+    {
+        return count($this->users);
+    }
 }

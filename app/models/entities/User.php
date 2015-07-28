@@ -42,12 +42,6 @@ class User extends BaseEntity
     protected $fullname;
 
     /**
-     * @var DateTime
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    protected $deletedAt;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Album", inversedBy="users"))
      * @ORM\JoinTable(name="users_albums",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="user_id")},
@@ -137,27 +131,6 @@ class User extends BaseEntity
     }
 
     /**
-     * @return DateTime
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * @param DateTime $deletedAt
-     */
-    public function setDeletedAt($deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
-    }
-
-    public function delete()
-    {
-        $this->setDeletedAt(new DateTime());
-    }
-
-    /**
      * @return mixed
      */
     public function getAlbums()
@@ -171,5 +144,13 @@ class User extends BaseEntity
     public function setAlbums($albums)
     {
         $this->albums = $albums;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAlbums()
+    {
+        return count($this->albums);
     }
 }

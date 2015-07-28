@@ -3,17 +3,27 @@
         <table class="table">
             <tr>
                 <th>ID</th>
-                <th>username</th>
-                <th>fullname</th>
-                <th>action</th>
+                <th>Username</th>
+                <th>Fullname</th>
+                <th>Favourite albums</th>
+                <th>Action</th>
             </tr>
             <tr n:foreach="$users as $user">
                 <td>{$user->getUserId()}</td>
                 <td>{$user->getUsername()}</td>
                 <td>{$user->getFullname()}</td>
                 <td>
-                    <a n:href=":Users:edit $user->getUserId()">Edit</a> |
-                    <a n:href=":Users:delete $user->getUserId()">Delete</a>
+                    {if $user->hasAlbums()}
+                        {foreach $user->getAlbums() as $album}
+                            <a n:href=":Album:edit $album->getAlbumId()">{$album->getAlbumName()}</a>
+                            {sep}, {/sep}
+                        {/foreach}
+                    {else}
+                        No albums were found
+                    {/if}
+                </td>
+                <td>
+                    <a n:href=":Users:edit $user->getUserId()">Edit albums</a>
                 </td>
             </tr>
         </table>

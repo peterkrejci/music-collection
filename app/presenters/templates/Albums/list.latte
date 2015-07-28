@@ -15,7 +15,7 @@
                 <td>{$album->getAlbumName()}</td>
                 <td>{$album->getYear()}</td>
                 <td>
-                    {if $album->getUsers()}
+                    {if $album->hasUsers()}
                         {foreach $album->getUsers() as $albumUser}
                             <a n:href=":Users:edit $albumUser->getUserId()">{$albumUser->getFullname()}</a>
                             {sep}, {/sep}

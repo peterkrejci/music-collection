@@ -76,13 +76,4 @@ class UserModel extends Nette\Object implements Nette\Security\IAuthenticator
 	{
 		return $this->userDao->findAll();
 	}
-
-	/**
-	 * @param $userId
-	 */
-	public function edit($userId)
-	{
-		$user = $this->userDao->find($userId);
-		$user->delete();
-	}
 }
