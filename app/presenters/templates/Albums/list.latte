@@ -1,0 +1,36 @@
+{block content}
+    {if $albums}
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Artist</th>
+                <th>Album name</th>
+                <th>Year</th>
+                <th>Users enjoying this album</th>
+                <th>Action</th>
+            </tr>
+            <tr n:foreach="$albums as $album">
+                <td>{$album->getAlbumId()}</td>
+                <td>{$album->getArtist()}</td>
+                <td>{$album->getAlbumName()}</td>
+                <td>{$album->getYear()}</td>
+                <td>
+                    {if $album->getUsers()}
+                        {foreach $album->getUsers() as $albumUser}
+                            <a n:href=":Users:edit $albumUser->getUserId()">{$albumUser->getFullname()}</a>
+                            {sep}, {/sep}
+                        {/foreach}
+                    {else}
+                        No users
+                    {/if}
+                </td>
+                <td>
+                    <a n:href=":Albums:Edit $album->getAlbumId()">Edit</a> |
+                    <a n:href=":Albums:Delete $album->getAlbumId()" onclick="return confirm('Really delete this album?')" >Delete</a>
+                </td>
+            </tr>
+        </table>
+    {else}
+        No albums were found.
+    {/if}
+{/block}

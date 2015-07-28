@@ -1,6 +1,11 @@
 <?php
 
+namespace App\Components;
 
-class EditUserControl {
+class EditUserControl
+{
+    public function createComponentEditUserForm()
+    {
 
+    }
 }

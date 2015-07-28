@@ -1,6 +1,0 @@
-parameters:
-
-doctrine:
-    user: root
-    password: r00tp0g0
-    dbname: music-collection
