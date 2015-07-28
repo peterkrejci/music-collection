@@ -40,7 +40,9 @@ class AlbumControl extends BaseControl
             ->setRequired();
         $form->addText('albumName', 'Album name')
             ->setRequired();
-        $form->addText('year', 'Year');
+        $form->addText('year', 'Year')
+            ->setRequired()
+            ->addRule(Form::INTEGER);
 
         if ($this->album) {
             $form->setDefaults([
