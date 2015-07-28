@@ -20,7 +20,7 @@ session:
 
 
 services:
-	- App\Model\UserManager
+	- App\Models\UserModel
 	- App\Forms\SignFormFactory
 	router: App\RouterFactory::createRouter
 
@@ -29,3 +29,7 @@ extensions:
     events: Kdyby\Events\DI\EventsExtension
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
+
+doctrine:
+    metadata:
+        App\Models\Entities: %appDir%/models/entities

@@ -12,13 +12,7 @@ Usage: create-user.php <name> <password>
 list(, $name, $password) = $_SERVER['argv'];
 
 $container = require __DIR__ . '/../app/bootstrap.php';
-$manager = $container->getByType('App\Model\UserManager');
+$manager = $container->getByType('App\Models\UserModel');
 
-try {
-	$manager->add($name, $password);
-	echo "User $name was added.\n";
-
-} catch (App\Model\DuplicateNameException $e) {
-	echo "Error: duplicate name.\n";
-	exit(1);
-}
+$manager->add($name, $password);
+echo "User $name was added.\n";
