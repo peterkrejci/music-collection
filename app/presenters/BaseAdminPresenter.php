@@ -5,7 +5,6 @@ namespace App\Presenters;
 use Nette;
 use App\Model;
 
-
 abstract class BaseAdminPresenter extends BasePresenter
 {
     protected function startup()

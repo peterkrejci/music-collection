@@ -39,7 +39,7 @@ class EditUserCollectionControl extends BaseControl
     }
 
     /**
-     * @param $name
+     * @param string $name
      */
     public function createComponentEditUserCollectionForm($name)
     {
@@ -60,9 +60,7 @@ class EditUserCollectionControl extends BaseControl
             $albumsContainer[$userAlbums->getAlbumId()]->setDefaultValue(TRUE);
         }
 
-
         $form->addSubmit('assign', 'Assign');
-
         $form->onSuccess[] = $this->successEditUserCollectionForm;
     }
 

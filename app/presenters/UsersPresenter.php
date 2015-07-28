@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use App\Components\EditUserCollectionControl;
+use App\Models\Entities\User;
 
 class UsersPresenter extends BaseAdminPresenter
 {
@@ -17,7 +18,7 @@ class UsersPresenter extends BaseAdminPresenter
     }
 
     /**
-     * @param integer $userId
+     * @param int $userId
      */
     public function actionEditCollection($userId)
     {
@@ -33,7 +34,7 @@ class UsersPresenter extends BaseAdminPresenter
     }
 
     /**
-     * @param integer $userId
+     * @param int $userId
      */
     public function actionDelete($userId)
     {

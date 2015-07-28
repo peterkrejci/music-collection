@@ -8,14 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\BaseEntity;
 
 /**
- * Class Album
- * @package App\Models\Entities
  * @ORM\Entity
  */
 class Album extends BaseEntity
 {
     /**
-     * @var integer
+     * @var int
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -65,7 +63,7 @@ class Album extends BaseEntity
     }
 
     /**
-     * @param integer $albumId
+     * @param int $albumId
      */
     public function setAlbumId($albumId)
     {
@@ -142,7 +140,7 @@ class Album extends BaseEntity
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getUsers()
     {

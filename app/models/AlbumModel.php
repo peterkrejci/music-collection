@@ -6,6 +6,7 @@ use App\Models\Entities\Album;
 use ArrayAccess;
 use Kdyby\Doctrine\EntityDao;
 use Kdyby\Doctrine\EntityManager;
+use Kdyby\Doctrine\ResultSet;
 use Nette;
 
 class AlbumModel extends Nette\Object
@@ -73,7 +74,7 @@ class AlbumModel extends Nette\Object
     }
 
     /**
-     * @return array
+     * @return array|ResultSet`
      */
     public function getAll()
     {

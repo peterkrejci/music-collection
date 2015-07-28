@@ -8,15 +8,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\BaseEntity;
 
 /**
- * Class User
- * @package App\Model\Entities
  * @ORM\Entity
  * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"})})
  */
 class User extends BaseEntity
 {
     /**
-     * @var integer
+     * @var int
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -64,7 +62,7 @@ class User extends BaseEntity
     }
 
     /**
-     * @param integer $userId
+     * @param int $userId
      */
     public function setUserId($userId)
     {

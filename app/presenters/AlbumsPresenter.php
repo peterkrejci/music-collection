@@ -23,7 +23,7 @@ class AlbumsPresenter extends BaseAdminPresenter
     }
 
     /**
-     * @param $albumId
+     * @param int $albumId
      */
     public function actionDelete($albumId)
     {

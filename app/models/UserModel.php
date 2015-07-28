@@ -80,8 +80,8 @@ class UserModel extends Nette\Object implements Nette\Security\IAuthenticator
 	}
 
 	/**
-	 * @param $userId
-	 * @return null|object
+	 * @param int $userId
+	 * @return User
 	 */
 	public function get($userId)
 	{
