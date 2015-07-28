@@ -15,7 +15,7 @@
                 <td>
                     {if $user->hasAlbums()}
                         {foreach $user->getAlbums() as $album}
-                            <a n:href=":Album:edit $album->getAlbumId()">{$album->getAlbumName()}</a>
+                            <a n:href=":Albums:edit $album->getAlbumId()">{$album->getAlbumName()}</a>
                             {sep}, {/sep}
                         {/foreach}
                     {else}
@@ -23,7 +23,7 @@
                     {/if}
                 </td>
                 <td>
-                    <a n:href=":Users:edit $user->getUserId()">Edit albums</a>
+                    <a n:href=":Users:EditCollection $user->getUserId()">Edit albums</a>
                 </td>
             </tr>
         </table>

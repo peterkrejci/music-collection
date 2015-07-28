@@ -44,8 +44,8 @@ class User extends BaseEntity
     /**
      * @ORM\ManyToMany(targetEntity="Album", inversedBy="users"))
      * @ORM\JoinTable(name="users_albums",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="user_id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="album_id", referencedColumnName="album_id")}
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="user_id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="album_id", referencedColumnName="album_id", onDelete="CASCADE")}
      *      )
      **/
     protected $albums;
@@ -131,7 +131,7 @@ class User extends BaseEntity
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getAlbums()
     {

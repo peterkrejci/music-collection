@@ -2,8 +2,15 @@
 
 namespace App\Presenters;
 
-class UsersPresenter extends BasePresenter
+use App\Components\EditUserCollectionControl;
+
+class UsersPresenter extends BaseAdminPresenter
 {
+    /**
+     * @var User
+     */
+    private $user;
+
     public function actionList()
     {
         $this->template->users = $this->context->userModel->getAll();
@@ -12,9 +19,17 @@ class UsersPresenter extends BasePresenter
     /**
      * @param integer $userId
      */
-    public function actionEdit($userId)
+    public function actionEditCollection($userId)
     {
+        $this->user = $this->context->userModel->get($userId);
+    }
 
+    /**
+     * @return EditUserCollectionControl
+     */
+    public function createComponentEditUserCollectionControl()
+    {
+        return new EditUserCollectionControl($this->user, $this->context->userModel, $this->context->albumModel);
     }
 
     /**

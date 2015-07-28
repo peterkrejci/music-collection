@@ -17,7 +17,7 @@
                 <td>
                     {if $album->hasUsers()}
                         {foreach $album->getUsers() as $albumUser}
-                            <a n:href=":Users:edit $albumUser->getUserId()">{$albumUser->getFullname()}</a>
+                            <a n:href=":Users:EditCollection $albumUser->getUserId()">{$albumUser->getFullname()}</a>
                             {sep}, {/sep}
                         {/foreach}
                     {else}

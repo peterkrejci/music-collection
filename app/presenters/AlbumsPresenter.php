@@ -5,7 +5,7 @@ namespace App\Presenters;
 use App\Components\AlbumControl;
 use App\Models\Entities\Album;
 
-class AlbumsPresenter extends BasePresenter
+class AlbumsPresenter extends BaseAdminPresenter
 {
     /**
      * @var Album

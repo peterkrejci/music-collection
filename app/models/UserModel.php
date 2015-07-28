@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Entities\User;
+use ArrayAccess;
+use Doctrine\Common\Collections\ArrayCollection;
 use Kdyby\Doctrine\EntityDao;
 use Kdyby\Doctrine\EntityManager;
 use Nette;
@@ -75,5 +77,28 @@ class UserModel extends Nette\Object implements Nette\Security\IAuthenticator
 	public function getAll()
 	{
 		return $this->userDao->findAll();
+	}
+
+	/**
+	 * @param $userId
+	 * @return null|object
+	 */
+	public function get($userId)
+	{
+		return $this->userDao->find($userId);
+	}
+
+	/**
+	 * @param User $user
+	 * @param array $albums
+	 */
+	public function assignAlbums(User $user, array $albums)
+	{
+		$user->albums->clear();
+
+		$user->setAlbums($albums);
+
+		$this->em->persist($user);
+		$this->em->flush();
 	}
 }
