@@ -1,27 +1,5 @@
 {block content}
-	{if $user->isLoggedIn()}
-		Hi, {$user->identity->fullname}.
-		(<a n:href=":Sign:out">Logout</a>)
-
-        <div>
-            <ul>
-                <li>
-                    Users
-                    <ul>
-                        <li>List users</li>
-                        <li>Add user</li>
-                    </ul>
-                </li>
-                <li>
-                    Albums
-                    <ul>
-                        <li>List albums</li>
-                        <li>Add album</li>
-                    </ul>
-                </li>
-            </ul>
-		</div>
-	{else}
+	{if !$user->isLoggedIn()}
 		<div>Restricted access</div>
 		Please <a n:href=":Sign:in">login</a> to continue
 	{/if}

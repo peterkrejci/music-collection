@@ -16,19 +16,15 @@ use Nette\Security\Passwords;
  */
 class UserModel extends Nette\Object implements Nette\Security\IAuthenticator
 {
-	const
-		TABLE_NAME = 'users',
-		COLUMN_ID = 'id',
-		COLUMN_NAME = 'username',
-		COLUMN_PASSWORD_HASH = 'password',
-		COLUMN_ROLE = 'role';
-
-
 	/**
 	 * @var EntityDao
 	 */
 	private $userDao;
 
+	/**
+	 * @var EntityManager
+	 */
+	private $em;
 
 	/**
 	 * @param EntityManager $em
@@ -36,12 +32,10 @@ class UserModel extends Nette\Object implements Nette\Security\IAuthenticator
 	public function __construct(EntityManager $em)
 	{
 		$this->userDao = $em->getRepository(User::class);
+		$this->em = $em;
 	}
 
-
 	/**
-	 * Performs an authentication.
-	 *
 	 * @param array $credentials
 	 * @throws AuthenticationException
 	 * @return Identity
@@ -60,20 +54,35 @@ class UserModel extends Nette\Object implements Nette\Security\IAuthenticator
 		return new Identity($user->getUserId(), NULL, $user->getLoginData());
 	}
 
-
 	/**
-	 * Adds new user.
-	 * @param $username
-	 * @param $password
+	 * @param string $username
+	 * @param string $password
+	 * @param string $fullname
 	 */
-	public function add($username, $password)
+	public function add($username, $password, $fullname)
 	{
 		$user = new User;
 		$user->setUsername($username);
 		$user->setPassword(Passwords::hash($password));
-		$user->setFullname('Administrator');
+		$user->setFullname($fullname);
 
 		$this->userDao->safePersist($user);
 	}
 
+	/**
+	 * @return array
+	 */
+	public function getAll()
+	{
+		return $this->userDao->findAll();
+	}
+
+	/**
+	 * @param $userId
+	 */
+	public function edit($userId)
+	{
+		$user = $this->userDao->find($userId);
+		$user->delete();
+	}
 }

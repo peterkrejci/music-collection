@@ -2,6 +2,8 @@
 
 namespace App\Models\Entities;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\BaseEntity;
 
@@ -40,6 +42,26 @@ class User extends BaseEntity
     protected $fullname;
 
     /**
+     * @var DateTime
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $deletedAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Album", inversedBy="users"))
+     * @ORM\JoinTable(name="users_albums",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="user_id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="album_id", referencedColumnName="album_id")}
+     *      )
+     **/
+    protected $albums;
+
+    public function __construct()
+    {
+        $this->albums = new ArrayCollection();
+    }
+
+    /**
      * @return int
      */
     public function getUserId()
@@ -48,7 +70,7 @@ class User extends BaseEntity
     }
 
     /**
-     * @param int $userId
+     * @param integer $userId
      */
     public function setUserId($userId)
     {
@@ -112,5 +134,42 @@ class User extends BaseEntity
             'username' => $this->getUsername(),
             'fullname' => $this->getFullname(),
         ];
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * @param DateTime $deletedAt
+     */
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
+    }
+
+    public function delete()
+    {
+        $this->setDeletedAt(new DateTime());
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlbums()
+    {
+        return $this->albums;
+    }
+
+    /**
+     * @param mixed $albums
+     */
+    public function setAlbums($albums)
+    {
+        $this->albums = $albums;
     }
 }

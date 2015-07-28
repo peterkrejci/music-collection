@@ -18,9 +18,13 @@ application:
 session:
 	expiration: 14 days
 
+nette:
+    container:
+        accessors: TRUE
 
 services:
-	- App\Models\UserModel
+	userModel: App\Models\UserModel
+	albumModel: App\Models\AlbumModel
 	- App\Forms\SignFormFactory
 	router: App\RouterFactory::createRouter
 

@@ -50,3 +50,4 @@ crashlytics-build.properties
 
 log/*
 temp/*
+app/config/config.local.neon
